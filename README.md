@@ -93,7 +93,7 @@ The Hospital Meal Ordering System streamlines the meal ordering process in healt
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Datafluentacademy/datafluent-academy.git
+   [git clone https://github.com/Emmanuel-222/Redeemer-s-Health-Village.git]
    cd rhv
    ```
 

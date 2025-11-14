@@ -18,37 +18,56 @@ export default function PatientPage() {
 
   const [showError, setShowError] = useState(false);
 
-  const menuOptionsByMeal: Record<string, string[]> = {
-    breakfast: [
-      "Scrambled Eggs",
-      "Toast with Butter",
-      "Oatmeal",
-      "Fresh Fruit",
-      "Orange Juice",
-      "Coffee",
-      "Yogurt",
-    ],
-    lunch: [
-      "Grilled Chicken Sandwich",
-      "Caesar Salad",
-      "Vegetable Soup",
-      "French Fries",
-      "Apple",
-      "Iced Tea",
-      "Chocolate Chip Cookie",
-    ],
-    dinner: [
-      "Baked Salmon",
-      "Mashed Potatoes",
-      "Green Beans",
-      "Mixed Vegetables",
-      "Dinner Roll",
-      "Chocolate Pudding",
-      "Milk",
-    ],
+  // Get current day of the week
+  const getCurrentDay = () => {
+    const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    return days[new Date().getDay()];
   };
 
-  const currentMenuOptions = formData.mealTime ? menuOptionsByMeal[formData.mealTime] || [] : [];
+  const [currentDay] = useState(getCurrentDay());
+
+  // Timetable for October - organized by day and meal time
+  const menuOptionsByDayAndMeal: Record<string, Record<string, string[]>> = {
+    monday: {
+      breakfast: ["MOI MOI AND PAP"],
+      lunch: ["FRIED - RICE"],
+      dinner: ["AMALA, EWEDU AND GBEGIRI"],
+    },
+    tuesday: {
+      breakfast: ["TEA BREAD AND SCRAMBLED EGG", "IRISH POTATOES AND FISH SAUCE", "AMALA AND PAP"],
+      lunch: ["COCONUT RICE", "JOLLOF RICE", "VEGETABLE RICE"],
+      dinner: ["POUNDO AND VEGETABLE SOUP", "PLANTAIN FLOUR AND OGBONO", "WHEAT AND VEGETABLE OKRO"],
+    },
+    wednesday: {
+      breakfast: ["CHICKEN SANDWICH AND COCOYAM"],
+      lunch: ["GROUND - RICE AND EGUSI"],
+      dinner: ["WHITE RICE AND STEW"],
+    },
+    thursday: {
+      breakfast: ["YAM AND GARDEN EGG SAUCE", "SWEET POTATOES AND EGG SAUCE", "OAT AND MOI MOI"],
+      lunch: ["SEMO AND BITTERLEAF SOUP", "PINEAPPLE RICE", "PLAIN RICE AND STIR-FRIED VEGGIES"],
+      dinner: ["WHITE RICE AND LEAFY VEG. SAUCE", "OAT SWALLOW AND EFORIRO", "AMALA AND EWEDU"],
+    },
+    friday: {
+      breakfast: ["VEGETABLE EGG SAUCE AND COCOYAM", "OAT AND MOI MOI"],
+      lunch: ["EBA AND EGUSI", "SEMO AND EDIKANKONG"],
+      dinner: ["JOLLOF RICE AND STIR-FRIED VEGGIES", "JAMBALAYA RICE"],
+    },
+    saturday: {
+      breakfast: ["GREEN TEA, BOILED EGG AND BREAD"],
+      lunch: ["JOLLOF RICE AND BEANS"],
+      dinner: ["POUNDO AND VEGETABLE OKRO"],
+    },
+    sunday: {
+      breakfast: ["BOILED PLANTAIN AND VEGETABLE EGG SAUCE", "PAP AND AKARA"],
+      lunch: ["PLAIN RICE, STEW AND BEANS", "OFADA RICE AND STEW"],
+      dinner: ["OAT SWALLOW AND BITTERLEAF SOUP", "AMALA EWEDU AND GBEGIRI", "EBA AND OGBONO"],
+    },
+  };
+
+  const currentMenuOptions = formData.mealTime && currentDay
+    ? menuOptionsByDayAndMeal[currentDay]?.[formData.mealTime] || []
+    : [];
 
   const handleMenuItemToggle = (item: string) => {
     setFormData((prev) => ({
@@ -195,6 +214,13 @@ export default function PatientPage() {
               </h2>
             </div>
 
+            {/* Display current day */}
+            <div className="mb-4 p-3 bg-blue-50 rounded-md border border-blue-200">
+              <p className="text-sm text-blue-900">
+                📅 Today is <span className="font-semibold capitalize">{currentDay}</span> - Menu for the day
+              </p>
+            </div>
+
             <div className="space-y-3">
               <label className="flex items-start gap-3 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50 transition">
                 <input
@@ -251,24 +277,33 @@ export default function PatientPage() {
                 <h2 className="text-lg font-medium text-blue-900">
                   Select Menu Items <span className="text-red-500">*</span>
                 </h2>
+                <span className="ml-auto text-xs text-gray-500 capitalize">
+                  {currentDay} - {formData.mealTime}
+                </span>
               </div>
 
-              <div className="space-y-3">
-                {currentMenuOptions.map((item) => (
-                  <label
-                    key={item}
-                    className="flex items-center gap-3 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50 transition"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={formData.menuItems.includes(item)}
-                      onChange={() => handleMenuItemToggle(item)}
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded"
-                    />
-                    <span className="text-[#1e3a8a] font-medium">{item}</span>
-                  </label>
-                ))}
-              </div>
+              {currentMenuOptions.length === 0 ? (
+                <div className="p-6 text-center">
+                  <p className="text-gray-500">No menu items available for this meal time today.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {currentMenuOptions.map((item) => (
+                    <label
+                      key={item}
+                      className="flex items-center gap-3 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50 transition"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={formData.menuItems.includes(item)}
+                        onChange={() => handleMenuItemToggle(item)}
+                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded"
+                      />
+                      <span className="text-[#1e3a8a] font-medium">{item}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 

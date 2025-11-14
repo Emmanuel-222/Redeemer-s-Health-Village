@@ -1,6 +1,6 @@
-# 🏥 Hospital Meal Ordering System
+## 🏥 Hospital Meal Ordering System
 
-A modern, full-stack meal ordering application for hospitals built with Next.js, TypeScript, and Tailwind CSS. This system enables seamless meal ordering workflow between patients, doctors, and kitchen staff.
+A modern, full-stack meal ordering application for hospitals built with Next.js, TypeScript, and Tailwind CSS. This system enables seamless meal ordering workflow between patients, doctors, and kitchen staff with a **dynamic weekly meal timetable**.
 
 ![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
@@ -37,11 +37,13 @@ The Hospital Meal Ordering System streamlines the meal ordering process in healt
 ### 👤 Patient Features
 - ✅ Personal information input (name, room number, bed)
 - ✅ Meal time selection (Breakfast, Lunch, Dinner)
-- ✅ Dynamic menu display based on selected meal time
+- ✅ **Dynamic menu based on day of week and meal time**
+- ✅ Automatic day detection (Monday-Sunday)
+- ✅ Weekly meal timetable with specific meals per day
 - ✅ Multiple menu item selection with checkboxes
 - ✅ Special dietary instructions field
 - ✅ Form validation with error messages
-- ✅ Success notifications on order submission
+- ✅ Success notifications with order ID on submission
 
 ### 👨‍⚕️ Doctor Features
 - ✅ Dashboard with order statistics (Pending, Approved, Rejected, Total)
@@ -93,7 +95,7 @@ The Hospital Meal Ordering System streamlines the meal ordering process in healt
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Datafluentacademy/datafluent-academy.git
+   git clone https://github.com/Emmanuel-222/Redeemer-s-Health-Village.git
    cd rhv
    ```
 
@@ -147,13 +149,14 @@ rhv/
 
 ### Patient Workflow
 1. Navigate to **Patient** page
-2. Enter patient information (name, room number, bed)
-3. Select meal time (Breakfast, Lunch, or Dinner)
-4. Menu items appear dynamically based on meal selection
-5. Select desired food items
-6. Add special instructions (optional)
-7. Click **Place Order**
-8. Receive confirmation toast notification
+2. System automatically detects current day of the week
+3. Enter patient information (name, room number, bed)
+4. Select meal time (Breakfast, Lunch, or Dinner)
+5. View menu items specific to current day and selected meal time
+6. Select desired food items from today's menu
+7. Add special instructions (optional)
+8. Click **Place Order**
+9. Receive confirmation toast notification with order ID
 
 ### Doctor Workflow
 1. Navigate to **Doctor Dashboard**
@@ -238,14 +241,44 @@ type OrderStatus =
 
 ### Meal Menus
 
-**Breakfast**
-- Scrambled Eggs, Toast with Butter, Oatmeal, Fresh Fruit, Orange Juice, Coffee, Yogurt
+The system uses a **weekly timetable** with different meals for each day of the week:
 
-**Lunch**
-- Grilled Chicken Sandwich, Caesar Salad, Vegetable Soup, French Fries, Apple, Iced Tea, Chocolate Chip Cookie
+#### Monday
+- **Breakfast**: MOI MOI AND PAP
+- **Lunch**: FRIED - RICE
+- **Dinner**: AMALA, EWEDU AND GBEGIRI
 
-**Dinner**
-- Baked Salmon, Mashed Potatoes, Green Beans, Mixed Vegetables, Dinner Roll, Chocolate Pudding, Milk
+#### Tuesday
+- **Breakfast**: TEA BREAD AND SCRAMBLED EGG, IRISH POTATOES AND FISH SAUCE, AMALA AND PAP
+- **Lunch**: COCONUT RICE, JOLLOF RICE, VEGETABLE RICE
+- **Dinner**: POUNDO AND VEGETABLE SOUP, PLANTAIN FLOUR AND OGBONO, WHEAT AND VEGETABLE OKRO
+
+#### Wednesday
+- **Breakfast**: CHICKEN SANDWICH AND COCOYAM
+- **Lunch**: GROUND - RICE AND EGUSI
+- **Dinner**: WHITE RICE AND STEW
+
+#### Thursday
+- **Breakfast**: YAM AND GARDEN EGG SAUCE, SWEET POTATOES AND EGG SAUCE, OAT AND MOI MOI
+- **Lunch**: SEMO AND BITTERLEAF SOUP, PINEAPPLE RICE, PLAIN RICE AND STIR-FRIED VEGGIES
+- **Dinner**: WHITE RICE AND LEAFY VEG. SAUCE, OAT SWALLOW AND EFORIRO, AMALA AND EWEDU
+
+#### Friday
+- **Breakfast**: VEGETABLE EGG SAUCE AND COCOYAM, OAT AND MOI MOI
+- **Lunch**: EBA AND EGUSI, SEMO AND EDIKANKONG
+- **Dinner**: JOLLOF RICE AND STIR-FRIED VEGGIES, JAMBALAYA RICE
+
+#### Saturday
+- **Breakfast**: GREEN TEA, BOILED EGG AND BREAD
+- **Lunch**: JOLLOF RICE AND BEANS
+- **Dinner**: POUNDO AND VEGETABLE OKRO
+
+#### Sunday
+- **Breakfast**: BOILED PLANTAIN AND VEGETABLE EGG SAUCE, PAP AND AKARA
+- **Lunch**: PLAIN RICE, STEW AND BEANS, OFADA RICE AND STEW
+- **Dinner**: OAT SWALLOW AND BITTERLEAF SOUP, AMALA EWEDU AND GBEGIRI, EBA AND OGBONO
+
+> **Note**: The menu automatically displays items based on the current day of the week and selected meal time. Patients can only see and order from today's menu.
 
 ### Future Backend Integration
 For production deployment, replace LocalStorage with:
@@ -314,7 +347,7 @@ Contributions are welcome! Please follow these steps:
 
 ## 👥 Authors
 
-- **Datafluent Academy** - [GitHub](https://github.com/Datafluentacademy)
+- **Emmanuel** - [GitHub](https://github.com/Emmanuel-222)
 
 ## 🙏 Acknowledgments
 
@@ -322,11 +355,12 @@ Contributions are welcome! Please follow these steps:
 - Tailwind CSS for the utility-first CSS framework
 - Lucide for beautiful icons
 - React Toastify for notification system
+- Redeemer's Health Village for the meal timetable specifications
 
 ## 📞 Support
 
-For support, email support@datafluentacademy.com or open an issue in this repository.
+For support, open an issue in this repository or contact the development team.
 
 ---
 
-**Made with ❤️ by Datafluent Academy**
+**Made with ❤️ for Redeemer's Health Village**
